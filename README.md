@@ -81,10 +81,16 @@ pnpm dev
 ## Buenas prácticas implementadas
 
 - **MVC** en backend (Controllers → Services → Prisma)
-- **Validación** con Zod
+- **Validación** con Zod (env y body)
 - **TypeScript** estricto
-- **Mobile-first** y responsive
-- **Safe areas** para dispositivos móviles
-- **PWA-ready** (manifest.json)
+- **DRY**: copy en `frontend/src/content/landing.ts`, animaciones en `frontend/src/lib/motion.ts`, contacto y docs en una sola fuente
+- **Entorno**: variables en `.env` (ver `.env.example`), validación en `backend/src/config/index.ts`
+- **Mobile-first**, safe areas, PWA-ready (manifest.json)
 - **Seguridad**: Helmet, CORS, bcrypt
 - **Monorepo** con pnpm workspaces
+
+## Documentación
+
+- **[El poder de una IA privada](docs/PRIVATE-GPT-GUIDE.md)** — Guía en español sobre IA privada para empresas (qué es, elementos, privacidad, seguridad, cómo implementarla). Localia es tu IA privada local, no un producto llamado "PrivateGPT".
+- **Integración [Booster Framework](https://docs.boosterframework.com)** — Backend event-driven y serverless; la guía enlaza Booster para equipos que quieran escalar el backend.
+- En la web: [Guía: IA privada](http://localhost:5008/docs/private-gpt) (español) y enlaces a Booster en la landing.
