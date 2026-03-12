@@ -4,8 +4,8 @@
 
 | Servicio | Puerto | Variable |
 |----------|--------|----------|
-| Frontend | **5008** | - |
-| Backend  | **8008** | PORT |
+| Frontend | **5009** | - |
+| Backend  | **8009** | PORT |
 
 ## Arquitectura para escalado horizontal
 
@@ -19,7 +19,7 @@
         ▼                  ▼                  ▼
 ┌───────────────┐  ┌───────────────┐  ┌───────────────┐
 │  Frontend    │  │  Frontend     │  │  Frontend     │
-│  :5008       │  │  :5008       │  │  :5008       │
+│  :5009       │  │  :5009       │  │  :5009       │
 └───────┬──────┘  └───────┬──────┘  └───────┬──────┘
         │                  │                  │
         └──────────────────┼──────────────────┘
@@ -33,7 +33,7 @@
         ▼                  ▼                  ▼
 ┌───────────────┐  ┌───────────────┐  ┌───────────────┐
 │  Backend      │  │  Backend      │  │  Backend      │
-│  :8008        │  │  :8008       │  │  :8008       │
+│  :8009        │  │  :8009       │  │  :8009       │
 └───────┬──────┘  └───────┬──────┘  └───────┬──────┘
         │                  │                  │
         └──────────────────┼──────────────────┘
@@ -65,11 +65,11 @@
 
 | Variable | Dev | Staging | Prod |
 |----------|-----|---------|------|
-| PORT | 8008 | 8008 | 8008 |
-| CORS_ORIGINS | localhost:5008 | https://staging... | https://app... |
+| PORT | 8009 | 8009 | 8009 |
+| CORS_ORIGINS | localhost:5009 | https://staging... | https://app... |
 | DATABASE_URL | local | pooler | pooler + read replicas |
 
 ### Kubernetes
 - `livenessProbe`: GET /health
 - `readinessProbe`: GET /api/health
-- Cada pod escucha en 8008
+- Cada pod escucha en 8009

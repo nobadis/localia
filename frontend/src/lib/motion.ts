@@ -1,6 +1,6 @@
 /**
  * Variantes de animación reutilizables (framer-motion).
- * Una sola fuente para evitar duplicar definiciones.
+ * hidden usa opacity: 1 para que el texto sea visible sin JS o antes de la animación.
  */
 export const stagger = {
   hidden: {},
@@ -8,7 +8,7 @@ export const stagger = {
 } as const;
 
 export const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 1, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
@@ -17,7 +17,7 @@ export const fadeUp = {
 } as const;
 
 export const scaleIn = {
-  hidden: { opacity: 0, scale: 0.92 },
+  hidden: { opacity: 1, scale: 0.97 },
   visible: {
     opacity: 1,
     scale: 1,

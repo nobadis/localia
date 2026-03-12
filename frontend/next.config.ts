@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   transpilePackages: ["geist"],
   output: "standalone",
+  // Sin badge "N" de Next en desarrollo; en producción no aparece
+  devIndicators: false,
 };
 
 export default nextConfig;

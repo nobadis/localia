@@ -2,10 +2,10 @@ import { z } from "zod";
 
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
-  PORT: z.string().transform(Number).default("8008"),
+  PORT: z.string().transform(Number).default("8009"),
   DATABASE_URL: z.string().default("postgresql://localhost:5432/localia"),
   JWT_SECRET: z.string().default("dev-secret-min-32-chars-for-jwt"),
-  CORS_ORIGINS: z.string().default("http://localhost:5008"),
+  CORS_ORIGINS: z.string().default("http://localhost:5009"),
 });
 
 const parsed = envSchema.safeParse(process.env);

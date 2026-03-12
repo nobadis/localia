@@ -55,10 +55,10 @@ pnpm --filter backend db:generate
 pnpm dev
 ```
 
-- **Frontend**: http://localhost:5008
-- **Backend**: http://localhost:8008
-- **Landing**: http://localhost:5008
-- **Webapp**: http://localhost:5008/app
+- **Frontend**: http://localhost:5009
+- **Backend**: http://localhost:8009
+- **Landing**: http://localhost:5009
+- **Webapp**: http://localhost:5009/app
 
 ## Scripts
 
@@ -75,8 +75,8 @@ pnpm dev
 
 | Servicio | Puerto |
 |----------|--------|
-| Frontend | 5008 |
-| Backend  | 8008 |
+| Frontend | 5009 |
+| Backend  | 8009 |
 
 ## Buenas prácticas implementadas
 
@@ -89,8 +89,21 @@ pnpm dev
 - **Seguridad**: Helmet, CORS, bcrypt
 - **Monorepo** con pnpm workspaces
 
+## Cómo te llegan los contactos
+
+Todos los botones **«Solicitar demo»** abren un **formulario** sencillo (nombre, email, mensaje opcional). Al enviar, el contenido te llega por email al buzón que configures.
+
+- **Email de destino**: En el frontend, `frontend/.env.local`: `NEXT_PUBLIC_CONTACT_EMAIL=tu-email@donde-revises.com`. En producción, la misma variable en el panel de entorno. Por defecto se usa **hola@localia.es**.
+- **Envío del formulario**: Se usa [Resend](https://resend.com). En `frontend/.env.local` (y en producción) añade `RESEND_API_KEY=re_xxx` (clave desde el dashboard de Resend). Sin esta variable el envío devuelve error 503.
+- **Resumen**: Interesado hace clic en «Solicitar demo» → se abre el modal → rellena y envía → **te llega un email** a tu buzón con sus datos; el `reply_to` es su email para que puedas responder directo.
+
+## Producción y troubleshooting
+
+- **Icono y marca**: La pestaña del navegador muestra la "L" de LOCALIA (verde sobre fondo oscuro), no el logo de Next. El indicador de desarrollo de Next está desactivado (`devIndicators: false`).
+- **Error "Cannot read properties of undefined (reading 'call')"**: Suele deberse a caché de Webpack o del navegador. Solución: en el frontend ejecuta `npm run build:clean` (o `pnpm --filter frontend build:clean`) y vuelve a desplegar; en el navegador, vacía caché y service workers (DevTools → Application → Clear storage).
+
 ## Documentación
 
 - **[El poder de una IA privada](docs/PRIVATE-GPT-GUIDE.md)** — Guía en español sobre IA privada para empresas (qué es, elementos, privacidad, seguridad, cómo implementarla). Localia es tu IA privada local, no un producto llamado "PrivateGPT".
 - **Integración [Booster Framework](https://docs.boosterframework.com)** — Backend event-driven y serverless; la guía enlaza Booster para equipos que quieran escalar el backend.
-- En la web: [Guía: IA privada](http://localhost:5008/docs/private-gpt) (español) y enlaces a Booster en la landing.
+- En la web: [Guía: IA privada](http://localhost:5009/docs/private-gpt) (español) y enlaces a Booster en la landing.

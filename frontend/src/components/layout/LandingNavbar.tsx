@@ -3,11 +3,17 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { CONTACT_EMAIL, DEMO_SUBJECT, DOCS, GUIA_IA_PRIVADA } from "@/content/landing";
+import { LocaliaLogo } from "@/components/ui/LocaliaLogo";
+import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
+import { openDemoForm } from "@/components/demo/DemoRequestForm";
+import { getLocale, getMessages, getLanding } from "@/lib/i18n";
 
 export function LandingNavbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const locale = getLocale();
+  const msg = getMessages(locale);
+  const landing = getLanding(locale);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -25,59 +31,61 @@ export function LandingNavbar() {
     >
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-3 group">
-          <span className="font-semibold text-white tracking-tight text-lg group-hover:opacity-90 transition-opacity">
-            LOCALIA
-          </span>
+          <LocaliaLogo size={28} onDark className="group-hover:opacity-90 transition-opacity" />
         </Link>
 
         <div className="hidden md:flex items-center gap-4">
+          <LocaleSwitcher className="shrink-0" />
           <a
             href="#problema"
             className="rounded-full px-4 py-1.5 text-[13px] font-medium text-gray-400 hover:text-white hover:bg-white/[0.05] transition-all"
           >
-            El problema
+            {msg.nav.problema}
           </a>
           <a
             href="#como-funciona"
             className="rounded-full px-4 py-1.5 text-[13px] font-medium text-gray-400 hover:text-white hover:bg-white/[0.05] transition-all"
           >
-            Cómo funciona
+            {msg.nav.comoFunciona}
           </a>
           <a
             href="#precio"
             className="rounded-full px-4 py-1.5 text-[13px] font-medium text-gray-400 hover:text-white hover:bg-white/[0.05] transition-all"
           >
-            Precio
+            {msg.nav.precio}
           </a>
           <a
             href="#faq"
             className="rounded-full px-4 py-1.5 text-[13px] font-medium text-gray-400 hover:text-white hover:bg-white/[0.05] transition-all"
           >
-            FAQ
+            {msg.nav.faq}
           </a>
           <Link
-            href={DOCS.privateGptGuide}
+            href={landing.DOCS.localiaGuide}
             className="rounded-full px-4 py-1.5 text-[13px] font-medium text-gray-400 hover:text-white hover:bg-white/[0.05] transition-all"
           >
-            {GUIA_IA_PRIVADA.navLabel}
+            {landing.GUIA_IA_PRIVADA.navLabel}
           </Link>
-          <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(DEMO_SUBJECT)}`}>
-            <span className="rounded-full bg-indigo-500 hover:bg-indigo-400 text-[13px] font-semibold text-white px-5 py-1.5 transition-all shadow-md shadow-indigo-500/20">
-              Solicitar Demo
-            </span>
-          </a>
-          <Link href="/app">
-            <span className="rounded-full bg-white/10 hover:bg-white/15 text-[13px] font-medium text-white px-4 py-1.5 transition-all border border-white/10">
-              Entrar
-            </span>
+          <Link
+            href="/demo"
+            className="rounded-full border border-emerald-400/40 text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400/60 px-4 py-1.5 text-[13px] font-semibold transition-all"
+          >
+            {msg.nav.pruébalo}
           </Link>
+          <button
+            type="button"
+            onClick={() => { setOpen(false); openDemoForm(); }}
+            className="rounded-full bg-emerald-600 hover:bg-emerald-500 text-[13px] font-semibold text-white px-5 py-1.5 transition-all shadow-md shadow-emerald-500/20"
+          >
+            {msg.nav.solicitarDemo}
+          </button>
         </div>
 
         <button
           className="md:hidden rounded-full p-2 text-gray-400 hover:text-white hover:bg-white/[0.06] transition-colors"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-label={open ? msg.common.closeMenu : msg.common.openMenu}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -91,33 +99,41 @@ export function LandingNavbar() {
           />
           <div className="fixed right-0 top-0 z-50 h-full w-72 bg-gray-950 backdrop-blur-2xl border-l border-white/[0.06] shadow-2xl md:hidden animate-slide-in-right">
             <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
-              <span className="font-semibold text-white">LOCALIA</span>
-              <button onClick={() => setOpen(false)} aria-label="Cerrar menú" className="rounded-full p-2 text-gray-500 hover:text-white transition-colors">
+              <LocaliaLogo size={24} onDark />
+              <button onClick={() => setOpen(false)} aria-label={msg.common.closeMenu} className="rounded-full p-2 text-gray-500 hover:text-white transition-colors">
                 <X className="h-5 w-5" />
               </button>
             </div>
             <div className="p-4 space-y-1">
+              <div className="flex items-center justify-between px-4 py-2 border-b border-white/[0.06]">
+                <span className="text-xs font-medium text-gray-500">{msg.common.languageLabel}</span>
+                <LocaleSwitcher compact />
+              </div>
               <a href="#problema" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/[0.05]">
-                El problema
+                {msg.nav.problema}
               </a>
               <a href="#como-funciona" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/[0.05]">
-                Cómo funciona
+                {msg.nav.comoFunciona}
               </a>
               <a href="#precio" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/[0.05]">
-                Precio
+                {msg.nav.precio}
               </a>
               <a href="#faq" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/[0.05]">
-                FAQ
+                {msg.nav.faq}
               </a>
-              <Link href={DOCS.privateGptGuide} onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/[0.05]">
-                {GUIA_IA_PRIVADA.navLabel}
+              <Link href={landing.DOCS.localiaGuide} onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/[0.05]">
+                {landing.GUIA_IA_PRIVADA.navLabel}
               </Link>
-              <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(DEMO_SUBJECT)}`} onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-semibold text-indigo-400">
-                Solicitar Demo
-              </a>
-              <Link href="/app" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-medium text-white bg-white/10">
-                Entrar a la app
+              <Link href="/demo" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-sm font-semibold text-emerald-400 hover:bg-emerald-500/10">
+                {msg.nav.pruébalo}
               </Link>
+              <button
+                type="button"
+                onClick={() => { setOpen(false); openDemoForm(); }}
+                className="block w-full text-left rounded-xl px-4 py-3 text-sm font-semibold text-emerald-400"
+              >
+                {msg.nav.solicitarDemo}
+              </button>
             </div>
           </div>
         </>

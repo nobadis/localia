@@ -7,7 +7,7 @@ COPY frontend/package.json ./frontend/
 RUN corepack enable pnpm && pnpm install --frozen-lockfile
 
 COPY frontend ./frontend
-ARG NEXT_PUBLIC_API_URL=http://localhost:8008/api
+ARG NEXT_PUBLIC_API_URL=http://localhost:8009/api
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 RUN pnpm --filter frontend build
 
@@ -16,11 +16,11 @@ FROM node:20-alpine
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV PORT=5008
+ENV PORT=5009
 
 COPY --from=builder /app/frontend/.next/standalone ./
 COPY --from=builder /app/frontend/.next/static ./.next/static
 COPY --from=builder /app/frontend/public ./public
 
-EXPOSE 5008
+EXPOSE 5009
 CMD ["node", "server.js"]

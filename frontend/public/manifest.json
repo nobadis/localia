@@ -1,7 +1,7 @@
 {
   "name": "LOCALIA",
   "short_name": "LOCALIA",
-  "description": "Tu IA. Tu servidor. Tus datos, siempre contigo.",
+  "description": "IA propia. Servidor propio. Datos que no salen.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",

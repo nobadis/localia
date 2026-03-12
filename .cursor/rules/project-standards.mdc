@@ -6,7 +6,7 @@ alwaysApply: true
 # LOCALIA - Convenciones del Proyecto
 
 ## Puertos fijos
-- Frontend: 5008 | Backend: 8008
+- Frontend: 5009 | Backend: 8009
 
 ## Estructura
 - **Backend**: MVC (Controllers → Services → Models/Prisma)

@@ -15,12 +15,12 @@ FROM node:20-alpine
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV PORT=8008
+ENV PORT=8009
 
 COPY --from=builder /app/backend/dist ./dist
 COPY --from=builder /app/backend/package.json ./
 COPY --from=builder /app/backend/prisma ./prisma
 COPY --from=builder /app/node_modules ./node_modules
 
-EXPOSE 8008
+EXPOSE 8009
 CMD ["node", "dist/index.js"]
