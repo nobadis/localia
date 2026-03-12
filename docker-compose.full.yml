@@ -1,0 +1,53 @@
+# Stack completo - Front 5008, Back 8008
+# Uso: docker compose -f docker-compose.full.yml up --build
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: localia
+      POSTGRES_PASSWORD: localia
+      POSTGRES_DB: localia
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U localia"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8008:8008"
+    environment:
+      PORT: 8008
+      DATABASE_URL: postgresql://localia:localia@postgres:5432/localia
+      CORS_ORIGINS: http://localhost:5008,http://frontend:5008
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8008/api
+    restart: unless-stopped
+    ports:
+      - "5008:5008"
+    environment:
+      PORT: 5008
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

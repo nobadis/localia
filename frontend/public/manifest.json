@@ -1,0 +1,10 @@
+{
+  "name": "LOCALIA",
+  "short_name": "LOCALIA",
+  "description": "Tu aplicación multiplataforma",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0ea5e9",
+  "orientation": "portrait-primary"
+}

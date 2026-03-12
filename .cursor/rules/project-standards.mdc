@@ -1,0 +1,26 @@
+---
+description: Estándares y convenciones del proyecto LOCALIA
+alwaysApply: true
+---
+
+# LOCALIA - Convenciones del Proyecto
+
+## Puertos fijos
+- Frontend: 5008 | Backend: 8008
+
+## Estructura
+- **Backend**: MVC (Controllers → Services → Models/Prisma)
+- **Frontend**: App Router, componentes en `components/`, lógica en `lib/` y `hooks/`
+- Rutas: `/` landing, `/app/*` webapp
+
+## Código
+- TypeScript estricto en todo el proyecto
+- Nombres en inglés para código, español para UI/copy
+- Componentes funcionales, hooks para lógica reutilizable
+- Validación con Zod en backend
+
+## UX/UI
+- Mobile-first, breakpoints: xs(375), sm, md, lg, xl
+- Touch targets mínimos 44x44px
+- Safe areas para dispositivos con notch
+- Focus visible en elementos interactivos
